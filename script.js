@@ -123,10 +123,67 @@ const showNotifikasiTag = () => {
 };
 
 const showNotifikasiSilent = () => {
-  const title = 'Notifikasi Senyap'
+  const title = "Notifikasi Senyap";
   const options = {
-    silent:true
-  }
+    silent: true,
+  };
 
-  displayNotif(title, options)
+  displayNotif(title, options);
+};
+
+function showNotifikasiGambar() {
+  const title = "Notifikasi dengan Gambar";
+  const options = {
+    body: "Ini adalah konten notifikasi dengan gambar latar.",
+    image: "./badge.png",
+  };
+
+  displayNotif(title, options);
+}
+
+const urlBase64ToUint8Array = (base64String) => {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+};
+// push subscription
+if ("PushManager" in window) {
+  navigator.serviceWorker.getRegistration().then((registration) => {
+    registration.pushManager
+      .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(
+          "BEcE-cE8dXWAkyA8w4VKQ4O1eW5P9sQxoHtm3txgpchXRxotA3oW0U8mynJ7kM82RU2O3nxyAmiXvYPCso_hTS4"
+        ),
+      })
+      .then((subscribe) => {
+        console.log("Berhasil subscribe dengan endpoint: ", subscribe.endpoint);
+        console.log(
+          "Berhasil subscribe dengan p256dh key: ",
+          btoa(
+            String.fromCharCode.apply(
+              null,
+              new Uint8Array(subscribe.getKey("p256dh"))
+            )
+          )
+        );
+        console.log(
+          "Berhasil subscribe dengan auth key: ",
+          btoa(
+            String.fromCharCode.apply(
+              null,
+              new Uint8Array(subscribe.getKey("auth"))
+            )
+          )
+        );
+      })
+      .catch((err) => {
+        console.error(`Tidak melakukan subscribe ${err.message}`);
+      });
+  });
 }
