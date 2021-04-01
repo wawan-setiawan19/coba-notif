@@ -91,8 +91,8 @@ const showNotifikasiActions = () => {
   const options = {
     body: "Ini adalah notifikasi menggunakan aksi",
     actions: [
-      { action: "yes-action", title: "Ya" },
-      { action: "no-action", title: "Tidak" },
+      { action: "yes-action", title: "Ya", icon: "./ya.png" },
+      { action: "no-action", title: "Tidak", icon: "./tidak.png" },
     ],
   };
 
