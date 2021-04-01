@@ -121,3 +121,12 @@ const showNotifikasiTag = () => {
   displayNotif(title2, options2);
   displayNotif(title3, options3);
 };
+
+const showNotifikasiSilent = () => {
+  const title = 'Notifikasi Senyap'
+  const options = {
+    silent:true
+  }
+
+  displayNotif(title, options)
+}
