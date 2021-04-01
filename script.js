@@ -80,7 +80,7 @@ const showNotifikasiBadge = () => {
   const title = "Notifikasi dengan badge";
   const options = {
     body: "Ini adalah konten dengan gambar badge",
-    badge: "./icons-192.png",
+    badge: "./badge.png",
   };
 
   displayNotif(title, options);
