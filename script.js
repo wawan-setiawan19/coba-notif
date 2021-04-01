@@ -85,3 +85,39 @@ const showNotifikasiBadge = () => {
 
   displayNotif(title, options);
 };
+
+const showNotifikasiActions = () => {
+  const title = "Notifikasi dengan Aksi";
+  const options = {
+    body: "Ini adalah notifikasi menggunakan aksi",
+    actions: [
+      { action: "yes-action", title: "Ya" },
+      { action: "no-action", title: "Tidak" },
+    ],
+  };
+
+  displayNotif(title, options);
+};
+
+const showNotifikasiTag = () => {
+  const title1 = "Notifikasi1";
+  const title2 = "Notifikasi2";
+  const title3 = "Notifikasi3";
+
+  const options1 = {
+    body: "Anggota tag 1",
+    tag: "message-group-1",
+  };
+  const options2 = {
+    body: "Anggota tag 2",
+    tag: "message-group-2",
+  };
+  const options3 = {
+    body: "Anggota tag 3",
+    tag: "message-group-1",
+  };
+
+  displayNotif(title1, options1);
+  displayNotif(title2, options2);
+  displayNotif(title3, options3);
+};
